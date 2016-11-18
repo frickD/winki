@@ -7,3 +7,21 @@
 /build
 /captures
 .externalNativeBuild
+.idea
+*.apk
+*.ap_
+*.class
+*.dex
+bin/
+gen/
+local.properties
+Thumbs.db
+.DS_Store
+obj/
+
+# Eclipse project files
+.classpath
+.project
+
+
+
