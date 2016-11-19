@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#35a918</color>
+    <color name="colorPrimary">#25511a</color>
     <color name="colorPrimaryDark">#25511a</color>
     <color name="colorAccent">#3a702d</color>
-    <color name="Winki">#35a918</color>
+    <color name="Winki">#25511a</color>
 </resources>

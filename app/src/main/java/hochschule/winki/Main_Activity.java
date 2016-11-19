@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -59,7 +60,13 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFirstSemester(View view) {
-        lv = (ListView) findViewById(R.id.lv);
-        ArrayList<String> subjectList = new ArrayList<>();
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.firstSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onBack(View view) {
+        setContentView(R.layout.activity_main);
     }
 }
