@@ -6,7 +6,7 @@ package hochschule.winki;
 
 public class Subjects {
     public static String[] firstSemester = {"Wirtschaftsmathematik 1", "BWL - Grundlagen", "Wirtschaftsinformatik 1", "Softwareentwicklung 1", "Buchführung"};
-    public static final String[] secondSemester = {"Wirtschaftsprivatrecht 1", "Volkswirtschaft", "Statistik und Operations Research", "Wirtschaftsmathematik 2", "Wirtschaftsinformatik 2", "Softwarentwicklung 2";
+    public static final String[] secondSemester = {"Wirtschaftsprivatrecht 1", "Volkswirtschaft", "Statistik und Operations Research", "Wirtschaftsmathematik 2", "Wirtschaftsinformatik 2", "Softwarentwicklung 2"};
     public static final String[] thirdSemester = {"Personal und Organisation", "Datenbanksysteme", "Datenkommunikation", "Softwareengineering 1", "Informationssysteme 1"};
     public static final String[] fourthSemester = {"Bilanzierung und Steuern", "Informationssysteme 2", "Softwareengineering 2"};
     //mal schauen ob wir das fünfte und siebte Semester überhaupt brauchen, sollten wir eher rauslassen

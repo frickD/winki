@@ -66,6 +66,62 @@ public class Main_Activity extends AppCompatActivity {
         lv.setAdapter(adapter);
     }
 
+    public void onSecondSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.secondSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onThirdSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.thirdSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onFourthSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.fourthSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onFifthSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.fifthSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onSixthSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.sixthSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onSeventhSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.seventhSemester);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onWirtschaftSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.wpfgWirtschaft);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
+    public void onITSemester (View view) {
+        setContentView(R.layout.semester);
+        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.wpfgIT);
+        lv = (ListView) findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+    }
+
     public void onBack(View view) {
         setContentView(R.layout.activity_main);
     }

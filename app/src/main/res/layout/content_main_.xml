@@ -34,6 +34,7 @@
                android:textColor="@android:color/background_light"
                android:fontFamily="monospace" />
            <Button
+               android:onClick="onSecondSemester"
                android:layout_marginLeft="5dp"
                android:layout_marginRight="5dp"
                android:layout_width="100dp"
@@ -44,6 +45,7 @@
                android:textColor="@android:color/background_light"
                android:fontFamily="monospace" />
            <Button
+               android:onClick="onThirdSemester"
                android:background="@color/colorAccent"
                android:text="3"
                android:layout_width="100dp"
@@ -62,6 +64,7 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:onClick="onFourthSemester"
                 android:background="@color/colorAccent"
                 android:layout_width="100dp"
                 android:text="4"
@@ -70,6 +73,7 @@
                 android:textColor="@android:color/background_light"
                 android:fontFamily="monospace" />
             <Button
+                android:onClick="onFifthSemester"
                 android:layout_width="100dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -80,6 +84,7 @@
                 android:textColor="@android:color/background_light"
                 android:fontFamily="monospace" />
             <Button
+                android:onClick="onSixthSemester"
                 android:text="6"
                 android:background="@color/colorAccent"
                 android:layout_width="100dp"
@@ -97,9 +102,32 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:onClick="onSeventhSemester"
                 android:background="@color/colorAccent"
                 android:text="7"
-                android:layout_width="310dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textSize="30sp"
+                android:textColor="@android:color/background_light"
+                android:fontFamily="monospace" />
+
+            <Button
+                android:onClick="onWirtschaftSemester"
+                android:background="@color/colorAccent"
+                android:text="W"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textSize="30sp"
+                android:textColor="@android:color/background_light"
+                android:fontFamily="monospace" />
+
+            <Button
+                android:onClick="onITSemester"
+                android:background="@color/colorAccent"
+                android:text="IT"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="30sp"
                 android:textColor="@android:color/background_light"
