@@ -1,5 +1,6 @@
 package hochschule.winki;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -15,9 +17,11 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main_Activity extends AppCompatActivity {
     private ListView lv;
+    private HashMap<String, String[]> objectMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class Main_Activity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        objectMap = Subjects.getObjectMap();
     }
 
     @Override
@@ -60,65 +65,52 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFirstSemester(View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.firstSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.firstSemester);
     }
 
     public void onSecondSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.secondSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.secondSemester);
     }
 
     public void onThirdSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.thirdSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.thirdSemester);
     }
 
     public void onFourthSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.fourthSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.fourthSemester);
     }
 
     public void onFifthSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.fifthSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.fifthSemester);
     }
 
     public void onSixthSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.sixthSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.sixthSemester);
     }
 
     public void onSeventhSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.seventhSemester);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.seventhSemester);
     }
 
     public void onWirtschaftSemester (View view) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.wpfgWirtschaft);
-        lv = (ListView) findViewById(R.id.listview);
-        lv.setAdapter(adapter);
+        openList(Subjects.wpfgWirtschaft);
     }
 
     public void onITSemester (View view) {
+        openList(Subjects.wpfgIT);
+    }
+
+    private void openList(final String[] givenSubject) {
         setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, Subjects.wpfgIT);
+        SemesterList adapter = new SemesterList(Main_Activity.this, givenSubject);
         lv = (ListView) findViewById(R.id.listview);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String[] test = objectMap.get("Wirtschaftsinformatik 1");
+                Toast.makeText(getApplicationContext(), objectMap.get(givenSubject[position]).toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
         lv.setAdapter(adapter);
     }
 

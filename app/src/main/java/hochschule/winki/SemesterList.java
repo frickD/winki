@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 ;
 
 /**
@@ -39,23 +40,6 @@ public class SemesterList extends ArrayAdapter<String> implements AdapterView.On
     }
 
 
-
-    // Das ist nur einmal eine Idee, wie man das Fach auslesen kann, auf das man geklickt hat.
-    // Wie man hier jetzt weiter macht um das Layout von SubjectList, subjects.xml, aufzurufen, das weißt ich leider nicht.
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View rowView, int position, long id) {
-        String semesterItem = (String) adapterView.getItemAtPosition(position);
-        String[] subject = findSubject(semesterItem);
-
-        //Toast.makeText(getActivity(), semesterItem, Toast.LENGTH_SHORT).show();
-        SubjectList adapter = new SubjectList(context, subject);
-
-
-        //lv.setAdapter(adapter);
-
-
-    }
-
     private String[] findSubject(String item) {
         if (item == "Wirtschaftsinformatik 1")
             return Subjects.wirtschaftsinformatik1;
@@ -66,4 +50,8 @@ public class SemesterList extends ArrayAdapter<String> implements AdapterView.On
         else return Subjects.wirtschaftsmathematik2;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
