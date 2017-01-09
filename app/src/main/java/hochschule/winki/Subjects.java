@@ -1,5 +1,7 @@
 package hochschule.winki;
 
+import java.util.HashMap;
+
 /**
  * Created by danielf on 19.11.2016.
  */
@@ -22,6 +24,12 @@ public class Subjects {
     public static final String[] wirtschaftsinformatik1 = {"Hardware", "Betriebssystem", "IT-Service-Management"};
     public static final String[] softwareentwicklung1 = {"Java", "Objektorientierte Programmierung", "Array"};
     public static final String[] bubi = {"Handelsgesetzbuch", "Umlaufvermögen", "Anlagevermögen"};
+
+    public static HashMap<String, String[]> getObjectMap() {
+        HashMap<String, String[]> map = new HashMap<>();
+        map.put("Wirtschaftsinformatik 1", wirtschaftsmathematik1);
+        return map;
+    }
 
     // 2. Semester
     public static final String[] wpr = {"Schadensersatz", "Kaufvertrag", "Rechtsfähigkeit"};
