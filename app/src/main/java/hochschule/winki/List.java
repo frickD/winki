@@ -15,7 +15,7 @@ import android.widget.Toast;
  * Created by danielf on 19.11.2016.
  */
 
-public class SemesterList extends ArrayAdapter<String> implements AdapterView.OnItemClickListener {
+public class List extends ArrayAdapter<String> implements AdapterView.OnItemClickListener {
 
     private final Activity context;
     private final String[] subjects;
@@ -23,7 +23,7 @@ public class SemesterList extends ArrayAdapter<String> implements AdapterView.On
     private AdapterView av;
 
 
-    public SemesterList(Activity context, String[] subjects) {
+    public List(Activity context, String[] subjects) {
         super(context, R.layout.list_row, subjects);
         this.context = context;
         this.subjects = subjects;
@@ -37,17 +37,6 @@ public class SemesterList extends ArrayAdapter<String> implements AdapterView.On
         TextView subject = (TextView) rowView.findViewById(R.id.subjectListRow);
         subject.setText(subjects[position]);
         return rowView;
-    }
-
-
-    private String[] findSubject(String item) {
-        if (item == "Wirtschaftsinformatik 1")
-            return Subjects.wirtschaftsinformatik1;
-        else if (item == "Wirtschaftsinformatik 2")
-            return Subjects.wirtschaftsinformatik2;
-        else if (item == "Wirtschafsmathematik 1")
-            return Subjects.wirtschaftsmathematik1;
-        else return Subjects.wirtschaftsmathematik2;
     }
 
     @Override
