@@ -1,6 +1,5 @@
 package hochschule.winki;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,13 +9,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Main_Activity extends AppCompatActivity {
@@ -81,7 +76,7 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFifthSemester (View view) {
-        openList(Subjects.fifthSemester);
+        //openList(Subjects.fifthSemester);
     }
 
     public void onSixthSemester (View view) {
@@ -89,7 +84,7 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onSeventhSemester (View view) {
-        openList(Subjects.seventhSemester);
+        //openList(Subjects.seventhSemester);
     }
 
     public void onWirtschaftSemester (View view) {
@@ -101,17 +96,27 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     private void openList(final String[] givenSubject) {
-        setContentView(R.layout.semester);
-        SemesterList adapter = new SemesterList(Main_Activity.this, givenSubject);
-        lv = (ListView) findViewById(R.id.listview);
+        List adapter = setListView(givenSubject);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String[] test = objectMap.get("Wirtschaftsinformatik 1");
-                Toast.makeText(getApplicationContext(), objectMap.get(givenSubject[position]).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), givenSubject[position], Toast.LENGTH_SHORT).show();
+                openSubject(objectMap.get(givenSubject[position]));
             }
         });
         lv.setAdapter(adapter);
+    }
+
+    private void openSubject(final String[] givenSubject) {
+        List adapter = setListView(givenSubject);
+        lv.setAdapter(adapter);
+    }
+
+    private List setListView(final String[] givenSubject) {
+        setContentView(R.layout.list);
+        List adapter = new List(Main_Activity.this, givenSubject);
+        lv = (ListView) findViewById(R.id.listview);
+        return adapter;
     }
 
     public void onBack(View view) {
