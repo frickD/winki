@@ -18,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WikipediaItem"></activity>
+        <uses-permission android:name="android.permission.INTERNET" />
     </application>
 
 </manifest>

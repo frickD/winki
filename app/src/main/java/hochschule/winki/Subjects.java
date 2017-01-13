@@ -168,4 +168,12 @@ public class Subjects {
         list.add(algoDat);
         return list;
     }
+
+    public final static HashMap<String, String> getWikipediaTitle(){
+        HashMap<String, String> map = new HashMap<>();
+        map.put("Rechtsform", "Rechtsform");
+        map.put("Rechnungswesen", "Rechnungswesen");
+        map.put("Marketing", "Marketing");
+        return map;
+    }
 }

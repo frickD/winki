@@ -1,5 +1,6 @@
 package hochschule.winki;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,9 @@ import java.util.HashMap;
 public class Main_Activity extends AppCompatActivity {
     private ListView lv;
     private HashMap<String, String[]> objectMap;
+    private HashMap<String, String> wikiTitleMap;
+    public static String WikiTitleBundleKey = "wikiTitle";
+    public static String ArticleTitleBundleKey = "Title";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class Main_Activity extends AppCompatActivity {
             }
         });
         objectMap = Subjects.getObjectMap();
+        wikiTitleMap = Subjects.getWikipediaTitle();
     }
 
     @Override
@@ -109,6 +114,18 @@ public class Main_Activity extends AppCompatActivity {
 
     private void openSubject(final String[] givenSubject) {
         List adapter = setListView(givenSubject);
+        lv.setOnItemClickListener((new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
+                        Bundle b = new Bundle();
+                        String test = wikiTitleMap.get(givenSubject[position]);
+                        b.putString(WikiTitleBundleKey, wikiTitleMap.get(givenSubject[position]));
+                        b.putString(ArticleTitleBundleKey, givenSubject[position]);
+                        myIntent.putExtras(b);
+                        startActivity(myIntent);
+                    }
+                }));
         lv.setAdapter(adapter);
     }
 
