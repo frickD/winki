@@ -38,13 +38,13 @@ public class WikipediaItem  extends AppCompatActivity {
 
         title.setText(b.getString(Main_Activity.ArticleTitleBundleKey));
 
-        try {
+       /* try {
             String test = new RetrieveFeedTask().execute("Marketing").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private String getArticle(String articleName) throws IOException, JSONException {

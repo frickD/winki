@@ -119,7 +119,6 @@ public class Main_Activity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
                         Bundle b = new Bundle();
-                        String test = wikiTitleMap.get(givenSubject[position]);
                         b.putString(WikiTitleBundleKey, wikiTitleMap.get(givenSubject[position]));
                         b.putString(ArticleTitleBundleKey, givenSubject[position]);
                         myIntent.putExtras(b);

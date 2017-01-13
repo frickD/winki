@@ -46,14 +46,14 @@ public class Subjects {
     }*/
 
     public static String[] firstSemester = {"Wirtschaftsmathematik 1", "BWL - Grundlagen", "Wirtschaftsinformatik 1", "Softwareentwicklung 1", "Buchführung"};
-    public static final String[] secondSemester = {"Wirtschaftsprivatrecht 1", "Volkswirtschaft", "Statistik und Operations Research", "Wirtschaftsmathematik 2", "Wirtschaftsinformatik 2", "Softwarentwicklung 2"};
+    public static final String[] secondSemester = {"Wirtschaftsprivatrecht 1", "Volkswirtschaft", "Statistik und Operations Research", "Wirtschaftsmathematik 2", "Softwarentwicklung 2", "Wirtschaftsinformatik 2"};
     public static final String[] thirdSemester = {"Personal und Organisation", "Datenbanksysteme", "Datenkommunikation", "Softwareengineering 1", "Informationssysteme 1"};
     public static final String[] fourthSemester = {"Bilanzierung und Steuern", "Informationssysteme 2", "Softwareengineering 2"};
     //private static final String[] fifthSemester = {"PBLV Seminar", "PBLV Projekt", "Praxisbericht"};
-    public static final String[] sixthSemester = {"Kosten- Und Leistungsrechnung", "Geschäftsprozesse", "Business Simulation"};
+    public static final String[] sixthSemester = {"Kosten- Und Leistungsrechnung", "Business Simulation", "Geschäftsprozesse"};
     //private static final String[] seventhSemester = {"Bachelorarbeit"};
-    public static final String[] wpfgWirtschaft = {"Produktionswirtschaft", "Marketing", "Datenschutz"};
-    public static final String[] wpfgIT = {"Algorithmen und Datenstrukturen", "IT-Sicherheit", "Datenmanagement"};
+    public static final String[] wpfgWirtschaft = {"Produktionswirtschaft", "Datenschutz",  "Marketing"};
+    public static final String[] wpfgIT = {"IT-Sicherheit", "Datenmanagement", "Algorithmen und Datenstrukturen"};
     public static ArrayList<String[]> subjectList() {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(firstSemester);
@@ -133,8 +133,7 @@ public class Subjects {
     //6. Semester
     private static final String[] klr = {"Gemeinkosten", "Einzelkosten", "Kostenstelle"};
     private static final String[] businessSimulation = {"Unternehmensbewertung", "Kleine und mittlere Unternehmen", "Startups"};
-    //TODO: GESCHÄFTSPROZESSE FEHLT BABSI
-    private static final String[] processes = {"Unternehmensbewertung", "Kleine und mittlere Unternehmen", "Startups"};
+    private static final String[] processes = {"Geschäftsprozess", "Geschäftsprozessmodellierung", "BPMN"};
     private static ArrayList<String[]> sixthSemesterList() {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(klr);
@@ -146,8 +145,7 @@ public class Subjects {
     //Wahlpflichtfächergruppe Wirtschaft
     private static final String[] produktionswirtschaft = {"Insourcing", "Outsourcing", "Lean-Management"};
     private static final String[] datenschutz = {"Datenschutzbeauftragter", "TMG", "TKG"};
-    //TODO: MARKETING FEHLT
-    private static final String[] marketing = {"Datenschutzbeauftragter", "TMG", "TKG"};
+    private static final String[] marketing = {"Marketing", "Werbung", "Marketing-Mix"};
     private static ArrayList<String[]> economisSemesterList() {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(produktionswirtschaft);
@@ -159,8 +157,7 @@ public class Subjects {
     //Wahlpflichtfächergruppe IT
     private static final String[] itSicherheit = {"Sicherheitsmanagement", "Access Control", "Risikomanagement"};
     private static final String[] datenmanagement = {"OLAP", "OLTP", "Logdatei"};
-    //TODO: ALGODAT FEHLT
-    private static final String[] algoDat = {"Algo", "Dat"};
+    private static final String[] algoDat = {"Algorithmus", "Datenstruktur", "Compiler"};
     private static ArrayList<String[]> informaticsSemesterList() {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(itSicherheit);
