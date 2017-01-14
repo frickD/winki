@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "hochschule.winki"
@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        useLibrary "org.apache.http.legacy"
     }
     buildTypes {
         release {
