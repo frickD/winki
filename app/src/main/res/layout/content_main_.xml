@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/search_layout"
             android:paddingTop="30dp"
             android:layout_width="match_parent"
