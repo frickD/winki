@@ -3,6 +3,8 @@ package hochschule.winki;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -42,8 +44,9 @@ import java.util.concurrent.ExecutionException;
 
 public class WikipediaItem  extends AppCompatActivity {
 
-    ProgressDialog pd;
-    TextView txtJson;
+    private ProgressDialog pd;
+    private TextView txtJson;
+    private String wikipediaTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,13 @@ public class WikipediaItem  extends AppCompatActivity {
         txtJson = (TextView) findViewById(R.id.article);
         Bundle b = getIntent().getExtras();
         title.setText(b.getString(Main_Activity.ArticleTitleBundleKey));
+        wikipediaTitle = b.getString(Main_Activity.WikiTitleBundleKey);
+        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + wikipediaTitle);
+    }
 
-        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + b.getString(Main_Activity.WikiTitleBundleKey));
+    public void onReadMore(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://de.m.wikipedia.org/wiki/" + wikipediaTitle));
+        startActivity(browserIntent);
     }
 
 
