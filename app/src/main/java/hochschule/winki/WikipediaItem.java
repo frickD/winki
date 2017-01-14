@@ -51,12 +51,10 @@ public class WikipediaItem  extends AppCompatActivity {
         setContentView(R.layout.wiki_article);
         TextView title = (TextView) findViewById(R.id.titlearticle);
         txtJson = (TextView) findViewById(R.id.article);
-
-       Bundle b = getIntent().getExtras();
-
+        Bundle b = getIntent().getExtras();
         title.setText(b.getString(Main_Activity.ArticleTitleBundleKey));
 
-        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=Marketing");
+        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + b.getString(Main_Activity.WikiTitleBundleKey));
     }
 
 
@@ -66,7 +64,7 @@ public class WikipediaItem  extends AppCompatActivity {
             super.onPreExecute();
 
             pd = new ProgressDialog(WikipediaItem.this);
-            pd.setMessage("Please wait");
+            pd.setMessage("Artikel wird geladen...");
             pd.setCancelable(false);
             pd.show();
         }
@@ -92,13 +90,13 @@ public class WikipediaItem  extends AppCompatActivity {
 
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+                    Log.d("Response: ", "> " + line);
 
                 }
-                String id = buffer.toString();
-                id = id.substring(41);
                 JSONObject jsonObj = new JSONObject( buffer.toString());
-                String article = jsonObj.getJSONObject("query").getJSONObject("pages").getJSONObject("").get("extract").toString();
+                String id = jsonObj.getJSONObject("query").getJSONObject("pages").names().toString();
+                id = id.replaceAll("[^0-9]", "");
+                String article = jsonObj.getJSONObject("query").getJSONObject("pages").getJSONObject(id).get("extract").toString();
                 return article;
 
 

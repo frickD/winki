@@ -232,7 +232,7 @@ public class Subjects {
         map.put("Kleine und mittlere Unternehmen", "Kleine_und_mittlere_Unternehmen");
         map.put("Startups", "Start-up-Unternehmen");
         map.put("Geschäftsprozess", "Gesch%C3%A4ftsprozess");
-        map.put("Geschäftsprozessmodellierung", "Gesch%C3%A4ftsprozessmodellieruung");
+        map.put("Geschäftsprozessmodellierung", "Geschäftsprozessmodellierung");
         map.put("BPMN", "Business_Process_Model_and_Notation");
         map.put("Insourcing", "Insourcing");
         map.put("Outsourcing", "Outsourcing");
