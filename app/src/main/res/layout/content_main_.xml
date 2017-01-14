@@ -15,6 +15,41 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/search_layout"
+            android:paddingTop="30dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/transtree"
+            android:layout_height="85dp">
+            <EditText
+                android:layout_marginLeft="10dp"
+                style="@style/whiteTextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                android:maxLines="1"
+                android:inputType="textShortMessage"
+                android:hint="Suchbegriff eingeben..."/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </View>
+            <Button
+                android:background="@drawable/go"
+                android:layout_width="100dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="30dp" />
+            <Button
+                android:layout_marginRight="10dp"
+                android:onClick="onCloseSearch"
+                android:layout_width="30dp"
+                android:background="@drawable/close"
+                android:layout_height="30dp" />
+        </LinearLayout>
+
 
 
         <LinearLayout

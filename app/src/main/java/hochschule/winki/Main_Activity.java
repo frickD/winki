@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Main_Activity extends AppCompatActivity {
     private HashMap<String, String> wikiTitleMap;
     public static String WikiTitleBundleKey = "wikiTitle";
     public static String ArticleTitleBundleKey = "Title";
+    LinearLayout searchLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class Main_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("  ");
         setSupportActionBar(toolbar);
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +39,7 @@ public class Main_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Sie durchsuchen die Bib der HM", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                 searchLayout.setVisibility(View.VISIBLE);
             }
         });
         objectMap = Subjects.getObjectMap();
@@ -81,7 +85,12 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFifthSemester (View view) {
-        //openList(Subjects.fifthSemester);
+        Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
+        Bundle b = new Bundle();
+        b.putString(WikiTitleBundleKey, "Praxissemester");
+        b.putString(ArticleTitleBundleKey, "Praxissemester");
+        myIntent.putExtras(b);
+        startActivity(myIntent);
     }
 
     public void onSixthSemester (View view) {
@@ -89,9 +98,17 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onSeventhSemester (View view) {
-        //openList(Subjects.seventhSemester);
+        Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
+        Bundle b = new Bundle();
+        b.putString(WikiTitleBundleKey, "Bachelorarbeit");
+        b.putString(ArticleTitleBundleKey, "Bachelorarbeit");
+        myIntent.putExtras(b);
+        startActivity(myIntent);
     }
 
+    public void onCloseSearch(View view) {
+        searchLayout.setVisibility(View.GONE);
+    }
     public void onWirtschaftSemester (View view) {
         openList(Subjects.wpfgWirtschaft);
     }

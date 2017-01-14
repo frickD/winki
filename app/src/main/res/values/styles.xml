@@ -31,4 +31,8 @@
         <item name="android:textSize">30dp</item>
     </style>
 
+    <style name="whiteTextColor">whiteTextColor
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>
