@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,7 +23,9 @@ public class Main_Activity extends AppCompatActivity {
     private HashMap<String, String> wikiTitleMap;
     public static String WikiTitleBundleKey = "wikiTitle";
     public static String ArticleTitleBundleKey = "Title";
-    LinearLayout searchLayout;
+    private LinearLayout searchLayout;
+    private boolean isBackOnSemester = true;
+    private String[] backArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class Main_Activity extends AppCompatActivity {
         toolbar.setTitle("  ");
         setSupportActionBar(toolbar);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -118,12 +122,14 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     private void openList(final String[] givenSubject) {
+        this.backArray = givenSubject;
         List adapter = setListView(givenSubject);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), givenSubject[position], Toast.LENGTH_SHORT).show();
                 openSubject(objectMap.get(givenSubject[position]));
+                isBackOnSemester = false;
             }
         });
         lv.setAdapter(adapter);
@@ -152,7 +158,14 @@ public class Main_Activity extends AppCompatActivity {
         return adapter;
     }
 
-    public void onBack(View view) {
-        setContentView(R.layout.activity_main);
+    @Override
+    public void onBackPressed() {
+        if(this.isBackOnSemester) {
+            setContentView(R.layout.activity_main);
+        }
+        else{
+            openList(backArray);
+            isBackOnSemester = true;
+        }
     }
 }

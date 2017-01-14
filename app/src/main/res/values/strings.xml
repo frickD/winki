@@ -1,4 +1,5 @@
 <resources>
+    <item name="backButton" type="id"/>
     <string name="app_name">Winki</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

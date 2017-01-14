@@ -17,14 +17,5 @@
             android:id="@+id/listview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
-
-        <Button
-            android:onClick="onBack"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:layout_width="70dp"
-            android:layout_height="30dp"
-            android:background="@color/colorAccent"
-            android:text="Zurück"/>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
