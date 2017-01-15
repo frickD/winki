@@ -89,8 +89,8 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFourthSemester (View view) {
-        backSemester = backString;
         backString = "4. Semester";
+        backSemester = backString;
         openList(Subjects.fourthSemester);
         setHeadline(backString);
     }
@@ -105,8 +105,8 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onSixthSemester (View view) {
-        backSemester = backString;
         backString = "6. Semester";
+        backSemester = backString;
         openList(Subjects.sixthSemester);
         setHeadline(backString);
     }
@@ -124,15 +124,15 @@ public class Main_Activity extends AppCompatActivity {
         searchLayout.setVisibility(View.GONE);
     }
     public void onWirtschaftSemester (View view) {
-        backSemester = backString;
         backString = "Wirtschaft Wahlfächer";
+        backSemester = backString;
         openList(Subjects.wpfgWirtschaft);
         setHeadline(backString);
     }
 
     public void onITSemester (View view) {
-        backSemester = backString;
         backString = "IT Wahlfächer";
+        backSemester = backString;
         openList(Subjects.wpfgIT);
         setHeadline(backString);
     }
@@ -210,7 +210,6 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     private void setHeadline (String clickedItem) {
-        String headlineText = clickedItem;
         TextView headline = (TextView) findViewById(R.id.header);
         headline.setText(clickedItem);
     }
