@@ -24,6 +24,7 @@
             android:background="@drawable/transtree"
             android:layout_height="85dp">
             <EditText
+                android:id="@+id/searchInput"
                 android:layout_marginLeft="10dp"
                 style="@style/whiteTextColor"
                 android:layout_width="wrap_content"
@@ -38,6 +39,7 @@
                 android:layout_weight="1">
             </View>
             <Button
+                android:onClick="onSearch"
                 android:background="@drawable/go"
                 android:layout_width="100dp"
                 android:layout_marginRight="5dp"

@@ -1,6 +1,7 @@
 package hochschule.winki;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -26,6 +29,8 @@ public class Main_Activity extends AppCompatActivity {
     private LinearLayout searchLayout;
     private boolean isBackOnSemester = true;
     private String[] backArray;
+    private String backString;
+    private String backSemester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +40,7 @@ public class Main_Activity extends AppCompatActivity {
         toolbar.setTitle("  ");
         setSupportActionBar(toolbar);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Sie durchsuchen die Bib der HM", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                 searchLayout.setVisibility(View.VISIBLE);
-            }
-        });
+        setSearchButtonListener();
         objectMap = Subjects.getObjectMap();
         wikiTitleMap = Subjects.getWikipediaTitle();
     }
@@ -73,19 +68,31 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onFirstSemester(View view) {
+        backString = "1. Semester";
+        backSemester = backString;
         openList(Subjects.firstSemester);
+        setHeadline(backString);
     }
 
     public void onSecondSemester (View view) {
+        backString = "2. Semester";
+        backSemester = backString;
         openList(Subjects.secondSemester);
+        setHeadline(backString);
     }
 
     public void onThirdSemester (View view) {
+        backString = "3. Semester";
+        backSemester = backString;
         openList(Subjects.thirdSemester);
+        setHeadline(backString);
     }
 
     public void onFourthSemester (View view) {
+        backSemester = backString;
+        backString = "4. Semester";
         openList(Subjects.fourthSemester);
+        setHeadline(backString);
     }
 
     public void onFifthSemester (View view) {
@@ -98,7 +105,10 @@ public class Main_Activity extends AppCompatActivity {
     }
 
     public void onSixthSemester (View view) {
+        backSemester = backString;
+        backString = "6. Semester";
         openList(Subjects.sixthSemester);
+        setHeadline(backString);
     }
 
     public void onSeventhSemester (View view) {
@@ -114,11 +124,17 @@ public class Main_Activity extends AppCompatActivity {
         searchLayout.setVisibility(View.GONE);
     }
     public void onWirtschaftSemester (View view) {
+        backSemester = backString;
+        backString = "Wirtschaft Wahlfächer";
         openList(Subjects.wpfgWirtschaft);
+        setHeadline(backString);
     }
 
     public void onITSemester (View view) {
+        backSemester = backString;
+        backString = "IT Wahlfächer";
         openList(Subjects.wpfgIT);
+        setHeadline(backString);
     }
 
     private void openList(final String[] givenSubject) {
@@ -129,6 +145,8 @@ public class Main_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), givenSubject[position], Toast.LENGTH_SHORT).show();
                 openSubject(objectMap.get(givenSubject[position]));
+                backString = givenSubject[position];
+                setHeadline(backString);
                 isBackOnSemester = false;
             }
         });
@@ -162,10 +180,38 @@ public class Main_Activity extends AppCompatActivity {
     public void onBackPressed() {
         if(this.isBackOnSemester) {
             setContentView(R.layout.activity_main);
+            setSearchButtonListener();
         }
         else{
             openList(backArray);
+            setHeadline(backSemester);
             isBackOnSemester = true;
         }
+    }
+
+    private void setSearchButtonListener() {
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Geben Sie Ihren Suchbegriff ein", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                searchLayout.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void onSearch(View view) {
+        EditText searchEditText = (EditText) findViewById(R.id.searchInput);
+        String searchInput = searchEditText.getText().toString();
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://de.m.wikipedia.org/wiki/" + searchInput));
+        startActivity(browserIntent);
+    }
+
+    private void setHeadline (String clickedItem) {
+        String headlineText = clickedItem;
+        TextView headline = (TextView) findViewById(R.id.header);
+        headline.setText(clickedItem);
     }
 }
