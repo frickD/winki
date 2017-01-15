@@ -40,12 +40,59 @@ public class WikipediaItem extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         wikipediaTitle = b.getString(Main_Activity.ArticleTitleBundleKey);
         title.setText(wikipediaTitle);
-        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + wikipediaTitle);
+        new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + checkWikipediaTitle(wikipediaTitle));
     }
 
     public void onReadMore(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://de.m.wikipedia.org/wiki/" + wikipediaTitle));
         startActivity(browserIntent);
+    }
+
+    private String checkWikipediaTitle(String title){
+        if (title.matches("OLAP")) {
+            title = "Online_Analytical_Processing";
+        }
+        else if(title.matches("OLTP")) {
+            title = "Online_Transaction_Processing";
+        }
+        else if(title.matches("Access Control")) {
+            title = "Zugriffskontrolle";
+        }
+        else if(title.matches("Grenzwerte")){
+           title =  "Grenzwert_(Funktion)";
+        }
+        else if(title.matches("Exception")){
+            title = "Ausnahmebehandlung";
+        }
+        else if(title.matches("Test-Driven-Development")){
+            title = "Testgetriebene_Entwicklung";
+        }
+        else if(title.matches("Datenbankmanagementsystem")){
+            title = "Datenbank";
+        }
+        else if(title.matches("Subnetting")){
+            title = "Subnetz";
+        }
+        else if(title.matches("TCP/IP")){
+            title = "Transmission_Control_Protocol/Internet_Protocol";
+        }
+        else if(title.matches("Anforderungen")){
+            title = "Anforderung_(Informatik)";
+        }
+        else if(title.matches("UML")){
+            title = "Unified_Modeling_Language";
+        }
+        else if(title.matches("Einkommenssteuer")){
+            title = "Einkommensteuer_(Deutschland)";
+        }
+        else if(title.matches("Startup")){
+            title = "Start-up-Unternehmen";
+        }
+        else if(title.matches("BPMN")){
+            title = "Business_Process_Model_and_Notation";
+        }
+        title = title.replace(" ", "_");
+        return title;
     }
 
 
