@@ -1,29 +1,15 @@
 package hochschule.winki;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,18 +17,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Hollinger on 20.12.2016.
  */
 
-public class WikipediaItem  extends AppCompatActivity {
+public class WikipediaItem extends AppCompatActivity {
 
     private ProgressDialog pd;
     private TextView txtJson;
@@ -55,8 +38,8 @@ public class WikipediaItem  extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.titlearticle);
         txtJson = (TextView) findViewById(R.id.article);
         Bundle b = getIntent().getExtras();
-        title.setText(b.getString(Main_Activity.ArticleTitleBundleKey));
-        wikipediaTitle = b.getString(Main_Activity.WikiTitleBundleKey);
+        wikipediaTitle = b.getString(Main_Activity.ArticleTitleBundleKey);
+        title.setText(wikipediaTitle);
         new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + wikipediaTitle);
     }
 
@@ -97,15 +80,14 @@ public class WikipediaItem  extends AppCompatActivity {
                 String line = "";
 
                 while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
+                    buffer.append(line + "\n");
                     Log.d("Response: ", "> " + line);
 
                 }
-                JSONObject jsonObj = new JSONObject( buffer.toString());
+                JSONObject jsonObj = new JSONObject(buffer.toString());
                 String id = jsonObj.getJSONObject("query").getJSONObject("pages").names().toString();
                 id = id.replaceAll("[^0-9]", "");
-                String article = jsonObj.getJSONObject("query").getJSONObject("pages").getJSONObject(id).get("extract").toString();
-                return article;
+                return jsonObj.getJSONObject("query").getJSONObject("pages").getJSONObject(id).get("extract").toString();
 
 
             } catch (MalformedURLException e) {
@@ -132,7 +114,7 @@ public class WikipediaItem  extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (pd.isShowing()){
+            if (pd.isShowing()) {
                 pd.dismiss();
             }
             txtJson.setText(result);

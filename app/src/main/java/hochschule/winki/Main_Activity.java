@@ -23,8 +23,6 @@ import java.util.HashMap;
 public class Main_Activity extends AppCompatActivity {
     private ListView lv;
     private HashMap<String, String[]> objectMap;
-    private HashMap<String, String> wikiTitleMap;
-    public static String WikiTitleBundleKey = "wikiTitle";
     public static String ArticleTitleBundleKey = "Title";
     private LinearLayout searchLayout;
     private boolean isBackOnSemester = true;
@@ -42,29 +40,6 @@ public class Main_Activity extends AppCompatActivity {
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         setSearchButtonListener();
         objectMap = Subjects.getObjectMap();
-        wikiTitleMap = Subjects.getWikipediaTitle();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Toast.makeText(this, "Settings ausgewählt", Toast.LENGTH_LONG).show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void onFirstSemester(View view) {
@@ -98,7 +73,6 @@ public class Main_Activity extends AppCompatActivity {
     public void onFifthSemester (View view) {
         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
         Bundle b = new Bundle();
-        b.putString(WikiTitleBundleKey, "Praxissemester");
         b.putString(ArticleTitleBundleKey, "Praxissemester");
         myIntent.putExtras(b);
         startActivity(myIntent);
@@ -114,7 +88,6 @@ public class Main_Activity extends AppCompatActivity {
     public void onSeventhSemester (View view) {
         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
         Bundle b = new Bundle();
-        b.putString(WikiTitleBundleKey, "Bachelorarbeit");
         b.putString(ArticleTitleBundleKey, "Bachelorarbeit");
         myIntent.putExtras(b);
         startActivity(myIntent);
@@ -160,7 +133,6 @@ public class Main_Activity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
                         Bundle b = new Bundle();
-                        b.putString(WikiTitleBundleKey, wikiTitleMap.get(givenSubject[position]));
                         b.putString(ArticleTitleBundleKey, givenSubject[position]);
                         myIntent.putExtras(b);
                         startActivity(myIntent);
