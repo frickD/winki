@@ -91,4 +91,31 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="introduction">
+        Optimal für Vorlesung und vor allem Klausur vorbereitet sein – das geht jetzt ganz einfach.\n\n
+
+        Winki bietet dir als Student der Wirtschaftsinformatik an der Hochschule München einen schnellen
+        Zugriff auf Wikipedia Artikeln, die dir während deines Studiums hilfreich sein können.\n\n
+
+        Gegliedert nach Semester und Kurse, findest du zu jedem Pflicht- bzw. Wahlpflichtmodul wichtige Begriffe,
+        die du sicherlich während den Vorlesungen hören wirst. Um dich schnell und einfach weitere Informationen
+        holen zu können, kannst du Winki benutzen. Winki stellt dir zu jedem Begriff einen Teil des entsprechenden
+        Wikipedia Artikels zur Verfügung und leitet dich für weitere Informationen direkt auf die Website weiter.\n\n
+
+        Möchtest du dich darüber hinaus mit Hilfe der Fachliteratur schlau machen, kannst du mit Winki ganz einfach
+        den Bücherbestand der HM Bibliothek durchsuchen und nach geeigneter Literatur suchen. Zudem teilt Winki dir mit,
+        ob du dich gerade in Nähe der Hochschule oder Bibliothek befindest.\n\n
+
+        Wie kommst du an die Wikipedia Informationen?\n\n
+
+        Wähle im Hauptmenü ein Semester aus. Hinter „W“ und „IT“ befinden sich die Wahlpflichtmodule für Wirtschaft bzw.
+        Informatik. Nach der Auswahl des Semesters bzw. der Wahlpflichtfächergruppen wird eine Liste mit Kursen angezeigt.
+        Diese sind entsprechend dem empfohlenen Semesterplan sortiert. Wurde ein Kurs ausgewählt, erscheint eine Liste mit
+        Begriffen. Nach Auswahl eines Begriffs wird der zugehörige Wikipedia Artikel angezeigt. Möchtest du dir den kompletten
+        Wikipedia Eintrag durchlesen, wirst du mit einem Klick auf den „Read more“-Button auf die Website des Artikels weitergeleitet.\n\n
+
+        Hast du Interesse an einem Buch aus der Bibliothek, kannst du die Suchfunktion auf der Hauptseite benutzen.
+        Klicke dazu auf die Lupe und trage deinen Suchbegriff ein. Nach Bestätigen der Eingabe öffnet sich das Suchergebnis
+        im Browser.
+</string>
 </resources>

@@ -3,7 +3,7 @@
 [![N|Solid](http://fs5.directupload.net/images/161117/x7g8xh4s.png)](https://nodesource.com/products/nsolid)
 
 Welcome to Winki! 
-This Android app is made for the buisness informatics students of the university of applied sciences munich. Sort by semester and subject It shows you all topics and terms that you need to know during your study.
+This Android app is made for the buisness informatics students of the university of applied sciences munich. Sorted by semester and subject, it shows you all topics and terms that you need to know during your study.
 
 Here some functions
 

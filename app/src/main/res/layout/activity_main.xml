@@ -32,7 +32,8 @@
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:textSize="80sp"
-                android:textColor="@android:color/background_light" />
+                android:textColor="@android:color/background_light"
+                />
 
             <android.support.v7.widget.Toolbar
                 android:fontFamily="cursive"
