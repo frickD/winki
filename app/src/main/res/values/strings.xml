@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <item name="backButton" type="id"/>
     <string name="app_name">Winki</string>
     <string name="introduction">
@@ -12,9 +12,8 @@
         holen zu können, kannst du Winki benutzen. Winki stellt dir zu jedem Begriff einen Teil des entsprechenden
         Wikipedia Artikels zur Verfügung und leitet dich für weitere Informationen direkt auf die Website weiter.\n\n
 
-        Möchtest du dich darüber hinaus mit Hilfe der Fachliteratur schlau machen, kannst du mit Winki ganz einfach
-        den Bücherbestand der HM Bibliothek durchsuchen und nach geeigneter Literatur suchen. Zudem teilt Winki dir mit,
-        ob du dich gerade in Nähe der Hochschule oder Bibliothek befindest.\n\n
+      	Zudem teilt Winki dir mit, ob du dich gerade in Nähe der Hochschule oder Bibliothek befindest.
+	Dann kannst du dir direkt Informationen aus der Fachliteratur holen.\n\n
 
         Wie kommst du an die Wikipedia Informationen?\n\n
 
@@ -24,7 +23,7 @@
         Begriffen. Nach Auswahl eines Begriffs wird der zugehörige Wikipedia Artikel angezeigt. Möchtest du dir den kompletten
         Wikipedia Eintrag durchlesen, wirst du mit einem Klick auf den „Read more“-Button auf die Website des Artikels weitergeleitet.\n\n
 
-        Hast du Interesse an einem Buch aus der Bibliothek, kannst du die Suchfunktion auf der Hauptseite benutzen.
+        Möchtest du einen anderen Wikipedia Artikel lesen, kannst du die Suchfunktion auf der Hauptseite benutzen.
         Klicke dazu auf die Lupe und trage deinen Suchbegriff ein. Nach Bestätigen der Eingabe öffnet sich das Suchergebnis
         im Browser.
     </string>
