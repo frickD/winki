@@ -15,6 +15,8 @@ Choose on of the semesters at the main menu and it'll show you a list with subje
 If you chose a subjects, it shows you a list of equivalent terms. After choosing one term, it displays you the first section of the fitting wikipedia article.
 For more information click on the "Read more"-Button and winki forwards you to the wikipedia-website.
 
+[![N|Solid](https://github.com/frickD/winki/blob/master/%23Organisatorisches/Mainmenu.png) [![N|Solid] https://github.com/frickD/winki/blob/master/%23Organisatorisches/Subjects.png) [![N|Solid] https://github.com/frickD/winki/blob/master/%23Organisatorisches/Terms.png) [![N|Solid] https://github.com/frickD/winki/blob/master/%23Organisatorisches/Wikipediaarticle.png) 
+
 If you are interested in one book from the library, you could use the searchfunction at the main menu. Click at the magnifying glass and insert you search term.
 After confirmation of the input, the browser will be opened and show you the search result.
 
