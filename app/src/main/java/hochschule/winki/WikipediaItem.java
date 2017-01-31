@@ -58,6 +58,15 @@ public class WikipediaItem extends AppCompatActivity {
         else if(title.matches("Access Control")) {
             title = "Zugriffskontrolle";
         }
+        //else if(title.matches("Funktion")) {
+        //    title = "Funktion_(Mathematik)";
+        //}
+        else if(title.matches("Java")){
+            title =  "Java_(Programmiersprache)";
+        }
+        else if(title.matches("Array")){
+            title =  "Feld_(Datentyp)";
+        }
         else if(title.matches("Grenzwerte")){
            title =  "Grenzwert_(Funktion)";
         }
@@ -66,6 +75,13 @@ public class WikipediaItem extends AppCompatActivity {
         }
         else if(title.matches("Test-Driven-Development")){
             title = "Testgetriebene_Entwicklung";
+        }
+        else if(title.matches("Vererbung")){
+            title = "Vererbung_(Programmierung)";
+        }
+
+        else if(title.matches("Matrix")){
+            title = "Matrix_(Mathematik)";
         }
         else if(title.matches("Datenbankmanagementsystem")){
             title = "Datenbank";
