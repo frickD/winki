@@ -1,11 +1,15 @@
 package hochschule.winki;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -57,11 +61,14 @@ public class GeofenceTransitionsIntentService extends IntentService
         GeofencingEvent geoFenceEvent = GeofencingEvent.fromIntent(intent);
         if (geoFenceEvent.hasError()) {
             int errorCode = geoFenceEvent.getErrorCode();
-            Log.e(TAG, "Location Services error: " + errorCode);
+            Log.e("GEOFENCE", "Location Services error: " + errorCode);
         } else {
 
             int transitionType = geoFenceEvent.getGeofenceTransition();
             if (Geofence.GEOFENCE_TRANSITION_ENTER == transitionType) {
+                Toast.makeText(this, "HI BIST DA", Toast.LENGTH_SHORT).show();
+                Log.e("GEOFENCE", "Enter the Zone");
+                showNotification(this);
                 // Connect to the Google Api service in preparation for sending a DataItem.
                 mGoogleApiClient.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
                 // Get the geofence id triggered. Note that only one geofence can be triggered at a
@@ -86,6 +93,7 @@ public class GeofenceTransitionsIntentService extends IntentService
                 mGoogleApiClient.disconnect();
             } else if (Geofence.GEOFENCE_TRANSITION_EXIT == transitionType) {
                 // Delete the data item when leaving a geofence region.
+                Log.e("GEOFENCE", "Leaving the Zone");
                 mGoogleApiClient.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
                 Wearable.DataApi.deleteDataItems(mGoogleApiClient, GEOFENCE_DATA_ITEM_URI).await();
                 showToast(this, R.string.exiting_geofence);
@@ -105,6 +113,23 @@ public class GeofenceTransitionsIntentService extends IntentService
                 Toast.makeText(context, context.getString(resourceId), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showNotification(Context context) {
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, Main_Activity.class), 0);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.close)
+                        .setContentTitle("Willkommen in der HM")
+                        .setContentText("Bitte öffnen Sie die App, um die Bib der HM zu durchsuchen");
+        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setDefaults(Notification.DEFAULT_SOUND);
+        mBuilder.setAutoCancel(true);
+        NotificationManager mNotificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(1, mBuilder.build());
+
     }
 
     @Override
