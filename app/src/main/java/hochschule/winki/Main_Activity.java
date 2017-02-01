@@ -91,12 +91,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
 
         if (!isGooglePlayServicesAvailable()) {
             Log.e(TAG, "Google Play services unavailable.");
-            Toast.makeText(this, "GOOGLE NICHT DA", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Google Play services unavailable", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (!isOnline()){
-            Toast.makeText(this, "GOOGLE NICHT DA", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.offline);
         }
 
