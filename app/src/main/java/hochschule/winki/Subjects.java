@@ -50,7 +50,7 @@ public class Subjects {
     public static final String[] thirdSemester = {"Personal und Organisation", "Datenbanksysteme", "Datenkommunikation", "Softwareengineering 1", "Informationssysteme 1"};
     public static final String[] fourthSemester = {"Bilanzierung und Steuern", "Informationssysteme 2", "Softwareengineering 2"};
     //private static final String[] fifthSemester = {"PBLV Seminar", "PBLV Projekt", "Praxisbericht"};
-    public static final String[] sixthSemester = {"Kosten- Und Leistungsrechnung", "Business Simulation", "Geschäftsprozesse"};
+    public static final String[] sixthSemester = {"Kosten- und Leistungsrechnung", "Business Simulation", "Geschäftsprozesse"};
     //private static final String[] seventhSemester = {"Bachelorarbeit"};
     public static final String[] wpfgWirtschaft = {"Produktionswirtschaft", "Datenschutz",  "Marketing"};
     public static final String[] wpfgIT = {"IT-Sicherheit", "Datenmanagement", "Algorithmen und Datenstrukturen"};
@@ -143,7 +143,7 @@ public class Subjects {
     }
 
     //Wahlpflichtfächergruppe Wirtschaft
-    private static final String[] produktionswirtschaft = {"Insourcing", "Outsourcing", "Lean-Management"};
+    private static final String[] produktionswirtschaft = {"Insourcing", "Outsourcing", "Lean Management"};
     private static final String[] datenschutz = {"Datenschutzbeauftragter", "TMG", "TKG"};
     private static final String[] marketing = {"Marketing", "Werbung", "Marketing-Mix"};
     private static ArrayList<String[]> economisSemesterList() {
