@@ -58,9 +58,9 @@ public class WikipediaItem extends AppCompatActivity {
         else if(title.matches("Access Control")) {
             title = "Zugriffskontrolle";
         }
-        //else if(title.matches("Funktion")) {
-        //    title = "Funktion_(Mathematik)";
-        //}
+        else if(title.matches("Funktion")) {
+            title = "Funktion_(Mathematik)";
+        }
         else if(title.matches("Java")){
             title =  "Java_(Programmiersprache)";
         }
@@ -118,6 +118,25 @@ public class WikipediaItem extends AppCompatActivity {
         }
         title = title.replace(" ", "_");
         return title;
+    }
+
+    private String checkWikipediaArticle(String article) {
+        article = article.replace("\n", "");
+        article = article.replace("     ", "");
+        article = article.replace("    ", "");
+        article = article.replace("   ", "");
+        article = article.replace("  ", "");
+        article = article.replace("{\\displaystyle y}", "");
+        article = article.replace("{\\displaystyle x}", "");
+        article = article.replace("{\\displaystyle f\\colon A\\to B}", " ");
+        article = article.replace("{\\displaystyle a\\in A}", " ");
+        article = article.replace("{\\displaystyle b\\in B}", " ");
+        article = article.replace("{\\displaystyle f(a)}", " ");
+        article = article.replace("{\\displaystyle b=f(a)}", " ");
+        article = article.replace("{\\displaystyle f}", " ");
+        article = article.replace("{\\displaystyle f^{-1}}", " ");
+        article = article.replace("{\\displaystyle f^{-1}\\colon B\\to A}", " ");
+        return article;
     }
 
 
@@ -189,7 +208,7 @@ public class WikipediaItem extends AppCompatActivity {
             if (pd.isShowing()) {
                 pd.dismiss();
             }
-            txtJson.setText(result);
+            txtJson.setText(checkWikipediaArticle(result));
         }
     }
 }

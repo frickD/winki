@@ -1,5 +1,5 @@
 ﻿<resources>
-    <item name="backButton" type="id"/>
+    <item name="backButton" type="id" />
     <string name="app_name">Winki</string>
     <string name="introduction">
         Optimal für Vorlesung und vor allem Klausur vorbereitet sein – das geht jetzt ganz einfach.\n\n
@@ -31,4 +31,5 @@
     <string name="start_geofence_service">Starting geofence transition service</string>
     <string name="entering_geofence">Entering the GeoFence zone</string>
     <string name="exiting_geofence">Exiting the GeoFence zone</string>
+    <string name="title_activity_libary_opener">LibaryOpenerActivity</string>
 </resources>

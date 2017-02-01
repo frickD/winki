@@ -32,10 +32,9 @@ import static hochschule.winki.Constants.KEY_GEOFENCE_ID;
  * Created by danielf on 16.01.2017.
  */
 
-public class GeofenceTransitionsIntentService extends IntentService
-        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class GeofenceTransitionsIntentService extends IntentService {
 
-    private GoogleApiClient mGoogleApiClient;
+
 
     public GeofenceTransitionsIntentService() {
         super(GeofenceTransitionsIntentService.class.getSimpleName());
@@ -44,11 +43,6 @@ public class GeofenceTransitionsIntentService extends IntentService
     @Override
     public void onCreate() {
         super.onCreate();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Wearable.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
     }
 
     /**
@@ -69,35 +63,12 @@ public class GeofenceTransitionsIntentService extends IntentService
                 Toast.makeText(this, "HI BIST DA", Toast.LENGTH_SHORT).show();
                 Log.e("GEOFENCE", "Enter the Zone");
                 showNotification(this);
-                // Connect to the Google Api service in preparation for sending a DataItem.
-                mGoogleApiClient.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
-                // Get the geofence id triggered. Note that only one geofence can be triggered at a
-                // time in this example, but in some cases you might want to consider the full list
-                // of geofences triggered.
-                String triggeredGeoFenceId = geoFenceEvent.getTriggeringGeofences().get(0)
-                        .getRequestId();
-                // Create a DataItem with this geofence's id. The wearable can use this to create
-                // a notification.
-                PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(GEOFENCE_DATA_ITEM_PATH);
-                putDataMapRequest.getDataMap().putString(KEY_GEOFENCE_ID, triggeredGeoFenceId);
-                putDataMapRequest.setUrgent();
-                if (mGoogleApiClient.isConnected()) {
-                    Wearable.DataApi.putDataItem(
-                            mGoogleApiClient, putDataMapRequest.asPutDataRequest()).await();
-                } else {
-                    Log.e(TAG, "Failed to send data item: " + putDataMapRequest
-                            + " - Client disconnected from Google Play Services");
-                }
                 Toast.makeText(this, getString(R.string.entering_geofence),
                         Toast.LENGTH_SHORT).show();
-                mGoogleApiClient.disconnect();
             } else if (Geofence.GEOFENCE_TRANSITION_EXIT == transitionType) {
                 // Delete the data item when leaving a geofence region.
                 Log.e("GEOFENCE", "Leaving the Zone");
-                mGoogleApiClient.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
-                Wearable.DataApi.deleteDataItems(mGoogleApiClient, GEOFENCE_DATA_ITEM_URI).await();
                 showToast(this, R.string.exiting_geofence);
-                mGoogleApiClient.disconnect();
             }
         }
     }
@@ -116,7 +87,7 @@ public class GeofenceTransitionsIntentService extends IntentService
     }
 
     private void showNotification(Context context) {
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, Main_Activity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, LibaryOpenerActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
@@ -131,17 +102,4 @@ public class GeofenceTransitionsIntentService extends IntentService
         mNotificationManager.notify(1, mBuilder.build());
 
     }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-    }
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-    }
-
 }

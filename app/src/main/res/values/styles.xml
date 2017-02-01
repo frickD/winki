@@ -17,7 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="listRow" >
+    <style name="listRow">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">20dp</item>
     </style>
