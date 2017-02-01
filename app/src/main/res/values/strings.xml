@@ -27,6 +27,7 @@
         Klicke dazu auf die Lupe und trage deinen Suchbegriff ein. Nach Bestätigen der Eingabe öffnet sich das Suchergebnis
         im Browser.
     </string>
+    <string name="offline">Leider konnte keine aktive Internetverbindung gefunden werden.</string>
     <string name="action_settings">Settings</string>
     <string name="start_geofence_service">Geofencing wurde gestartet</string>
     <string name="entering_geofence">Sie sind in der Nähe von der Hochschule München</string>

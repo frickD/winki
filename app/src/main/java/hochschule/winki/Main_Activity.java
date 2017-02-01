@@ -2,9 +2,12 @@ package hochschule.winki;
 
 import android.Manifest;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -57,8 +60,8 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     ArrayList<Geofence> mGeofenceList;
 
     // These will store hard-coded geofences in this sample app.
-    private SimpleGeofence mAndroidBuildingGeofence;
-    private SimpleGeofence mYerbaBuenaGeofence;
+    private SimpleGeofence redCubeBuildingGeofence;
+    private SimpleGeofence libraryHMGeofence;
 
     // Persistent storage for geofences.
     private SimpleGeofenceStore mGeofenceStorage;
@@ -92,6 +95,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
             return;
         }
 
+        if (!isOnline()){
+            Toast.makeText(this, "GOOGLE NICHT DA", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.offline);
+        }
+
         mApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -113,7 +121,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
      */
     public void createGeofences() {
         // Create internal "flattened" objects containing the geofence data.
-        mAndroidBuildingGeofence = new SimpleGeofence(
+        redCubeBuildingGeofence = new SimpleGeofence(
                 REDCUBE_BUILDING_ID,                // geofenceId.
                 REDCUBE_BUILDING_LATITUDE,
                 REDCUBE_BUILDING_LONGITUDE,
@@ -121,7 +129,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
                 GEOFENCE_EXPIRATION_TIME,
                 Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT
         );
-        mYerbaBuenaGeofence = new SimpleGeofence(
+        libraryHMGeofence = new SimpleGeofence(
                 LIBRARY_HM_ID,                // geofenceId.
                 LIBRARY_HM_LATITUDE,
                 LIBRARY_HM_LONGITUDE,
@@ -131,10 +139,10 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         );
 
         // Store these flat versions in SharedPreferences and add them to the geofence list.
-        mGeofenceStorage.setGeofence(REDCUBE_BUILDING_ID, mAndroidBuildingGeofence);
-        mGeofenceStorage.setGeofence(LIBRARY_HM_ID, mYerbaBuenaGeofence);
-        mGeofenceList.add(mAndroidBuildingGeofence.toGeofence());
-        mGeofenceList.add(mYerbaBuenaGeofence.toGeofence());
+        mGeofenceStorage.setGeofence(REDCUBE_BUILDING_ID, redCubeBuildingGeofence);
+        mGeofenceStorage.setGeofence(LIBRARY_HM_ID, libraryHMGeofence);
+        mGeofenceList.add(redCubeBuildingGeofence.toGeofence());
+        mGeofenceList.add(libraryHMGeofence.toGeofence());
     }
 
 
@@ -197,12 +205,28 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
+     * Checks if Mobile has internet Connection.
+     * @return true if it is.
+     */
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    /**
      * Create a PendingIntent that triggers GeofenceTransitionIntentService when a geofence
      * transition occurs.
      */
     private PendingIntent getGeofenceTransitionPendingIntent() {
         Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    public void onReload(View view) {
+        Intent myIntent = new Intent(Main_Activity.this, Main_Activity.class);
+        startActivity(myIntent);
     }
 
     public void onFirstSemester(View view) {
