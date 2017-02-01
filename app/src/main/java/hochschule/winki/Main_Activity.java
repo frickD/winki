@@ -1,20 +1,20 @@
 package hochschule.winki;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,16 +31,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static hochschule.winki.Constants.TAG;
-import static hochschule.winki.Constants.ANDROID_BUILDING_ID;
-import static hochschule.winki.Constants.ANDROID_BUILDING_LATITUDE;
-import static hochschule.winki.Constants.ANDROID_BUILDING_LONGITUDE;
-import static hochschule.winki.Constants.ANDROID_BUILDING_RADIUS_METERS;
+import static hochschule.winki.Constants.REDCUBE_BUILDING_ID;
+import static hochschule.winki.Constants.REDCUBE_BUILDING_LATITUDE;
+import static hochschule.winki.Constants.REDCUBE_BUILDING_LONGITUDE;
+import static hochschule.winki.Constants.REDCUBE_BUILDING_RADIUS_METERS;
 import static hochschule.winki.Constants.CONNECTION_FAILURE_RESOLUTION_REQUEST;
 import static hochschule.winki.Constants.GEOFENCE_EXPIRATION_TIME;
-import static hochschule.winki.Constants.YERBA_BUENA_ID;
-import static hochschule.winki.Constants.YERBA_BUENA_LATITUDE;
-import static hochschule.winki.Constants.YERBA_BUENA_LONGITUDE;
-import static hochschule.winki.Constants.YERBA_BUENA_RADIUS_METERS;
+import static hochschule.winki.Constants.LIBRARY_HM_ID;
+import static hochschule.winki.Constants.LIBRARY_HM_LATITUDE;
+import static hochschule.winki.Constants.LIBRARY_HM_LONGITUDE;
+import static hochschule.winki.Constants.LIBRARY_HM_RADIUS_METERS;
 
 public class Main_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private ListView lv;
@@ -69,7 +69,10 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mApiClient;
 
     // Defines the allowable request types (in this example, we only add geofences).
-    private enum REQUEST_TYPE {ADD}
+    private enum REQUEST_TYPE {
+        ADD
+    }
+
     private REQUEST_TYPE mRequestType;
 
     @Override
@@ -85,7 +88,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
 
         if (!isGooglePlayServicesAvailable()) {
             Log.e(TAG, "Google Play services unavailable.");
-            finish();
+            Toast.makeText(this, "GOOGLE NICHT DA", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -111,25 +114,25 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     public void createGeofences() {
         // Create internal "flattened" objects containing the geofence data.
         mAndroidBuildingGeofence = new SimpleGeofence(
-                ANDROID_BUILDING_ID,                // geofenceId.
-                ANDROID_BUILDING_LATITUDE,
-                ANDROID_BUILDING_LONGITUDE,
-                ANDROID_BUILDING_RADIUS_METERS,
+                REDCUBE_BUILDING_ID,                // geofenceId.
+                REDCUBE_BUILDING_LATITUDE,
+                REDCUBE_BUILDING_LONGITUDE,
+                REDCUBE_BUILDING_RADIUS_METERS,
                 GEOFENCE_EXPIRATION_TIME,
                 Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT
         );
         mYerbaBuenaGeofence = new SimpleGeofence(
-                YERBA_BUENA_ID,                // geofenceId.
-                YERBA_BUENA_LATITUDE,
-                YERBA_BUENA_LONGITUDE,
-                YERBA_BUENA_RADIUS_METERS,
+                LIBRARY_HM_ID,                // geofenceId.
+                LIBRARY_HM_LATITUDE,
+                LIBRARY_HM_LONGITUDE,
+                LIBRARY_HM_RADIUS_METERS,
                 GEOFENCE_EXPIRATION_TIME,
                 Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT
         );
 
         // Store these flat versions in SharedPreferences and add them to the geofence list.
-        mGeofenceStorage.setGeofence(ANDROID_BUILDING_ID, mAndroidBuildingGeofence);
-        mGeofenceStorage.setGeofence(YERBA_BUENA_ID, mYerbaBuenaGeofence);
+        mGeofenceStorage.setGeofence(REDCUBE_BUILDING_ID, mAndroidBuildingGeofence);
+        mGeofenceStorage.setGeofence(LIBRARY_HM_ID, mYerbaBuenaGeofence);
         mGeofenceList.add(mAndroidBuildingGeofence.toGeofence());
         mGeofenceList.add(mYerbaBuenaGeofence.toGeofence());
     }
@@ -159,10 +162,13 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         // Get the PendingIntent for the geofence monitoring request.
         // Send a request to add the current geofences.
         mGeofenceRequestIntent = getGeofenceTransitionPendingIntent();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, getString(R.string.no_gps_permission), Toast.LENGTH_SHORT).show();
+            return;
+        }
         LocationServices.GeofencingApi.addGeofences(mApiClient, mGeofenceList,
                 mGeofenceRequestIntent);
         Toast.makeText(this, getString(R.string.start_geofence_service), Toast.LENGTH_SHORT).show();
-        //finish();
     }
 
     @Override

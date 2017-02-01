@@ -26,16 +26,16 @@ public class Constants {
     public static final long GEOFENCE_EXPIRATION_TIME = Geofence.NEVER_EXPIRE;
 
     // Geofence parameters for the Android building on Google's main campus in Mountain View.
-    public static final String ANDROID_BUILDING_ID = "1";
-    public static final double ANDROID_BUILDING_LATITUDE = 48.007878;
-    public static final double ANDROID_BUILDING_LONGITUDE = 11.333077;
-    public static final float ANDROID_BUILDING_RADIUS_METERS = 50.0f;
+    public static final String REDCUBE_BUILDING_ID = "1";
+    public static final double REDCUBE_BUILDING_LATITUDE = 48.007878;
+    public static final double REDCUBE_BUILDING_LONGITUDE = 11.333077;
+    public static final float REDCUBE_BUILDING_RADIUS_METERS = 50.0f;
 
     // Geofence parameters for the Yerba Buena Gardens near the Moscone Center in San Francisco.
-    public static final String YERBA_BUENA_ID = "2";
-    public static final double YERBA_BUENA_LATITUDE = 48.006644;
-    public static final double YERBA_BUENA_LONGITUDE = 11.331235;
-    public static final float YERBA_BUENA_RADIUS_METERS = 50.0f;
+    public static final String LIBRARY_HM_ID = "2";
+    public static final double LIBRARY_HM_LATITUDE = 48.006644;
+    public static final double LIBRARY_HM_LONGITUDE = 11.331235;
+    public static final float LIBRARY_HM_RADIUS_METERS = 50.0f;
 
 
     // The constants below are less interesting than those above.

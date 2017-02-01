@@ -79,7 +79,6 @@ public class WikipediaItem extends AppCompatActivity {
         else if(title.matches("Vererbung")){
             title = "Vererbung_(Programmierung)";
         }
-
         else if(title.matches("Matrix")){
             title = "Matrix_(Mathematik)";
         }
