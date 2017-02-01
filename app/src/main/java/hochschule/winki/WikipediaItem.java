@@ -101,11 +101,20 @@ public class WikipediaItem extends AppCompatActivity {
         else if(title.matches("Einkommenssteuer")){
             title = "Einkommensteuer_(Deutschland)";
         }
-        else if(title.matches("Startup")){
+        else if(title.matches("Kanban")){
+            title = "Kanban_%28Softwareentwicklung%29";
+        }
+        else if(title.matches("Startups")){
             title = "Start-up-Unternehmen";
         }
         else if(title.matches("BPMN")){
             title = "Business_Process_Model_and_Notation";
+        }
+        else if(title.matches("TMG")){
+            title = "Telemediengesetz";
+        }
+        else if(title.matches("TKG")){
+            title = "Telekommunikationsgesetz_%28Deutschland%29";
         }
         title = title.replace(" ", "_");
         return title;
