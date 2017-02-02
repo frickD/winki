@@ -31,6 +31,11 @@ public class WikipediaItem extends AppCompatActivity {
     private TextView txtJson;
     private String wikipediaTitle;
 
+    /*
+     * Laden des Wikipedia Items
+     * Es wird der Titel des gewählten Begriffes dargestellt
+     * und ein request an die Wikipedia API mit dem Begriff losgeschickt
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +48,20 @@ public class WikipediaItem extends AppCompatActivity {
         new JsonTask().execute("https://de.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + checkWikipediaTitle(wikipediaTitle));
     }
 
+    /*
+    * onClick Methode
+    * Falls der User mehr lesen will, so öffnet sich der Browser mit dem Wikipedia Artikel zum angeklickten Begriff
+    */
     public void onReadMore(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://de.m.wikipedia.org/wiki/" + wikipediaTitle));
         startActivity(browserIntent);
     }
 
+    /* Überprüfungsmethode
+    * Manchmal ist der Titel nicht übereinstimmend mit dem Wikipediaartikel
+    * dies wird hier überprüft und liefert den richtigen String zurück,
+    * um den Request richtig zusenden
+    */
     private String checkWikipediaTitle(String title){
         if (title.matches("OLAP")) {
             title = "Online_Analytical_Processing";
@@ -119,6 +133,10 @@ public class WikipediaItem extends AppCompatActivity {
         return title;
     }
 
+    /* Überprüfungsmethode
+    * Manche Atrikel enthalten komische Zeilenabstände, Umbrüche oder Codes,
+    * diese werden hier entfernt
+    */
     private String checkWikipediaArticle(String article) {
         article = article.replace("\n", "");
         article = article.replace("     ", "");
@@ -139,6 +157,13 @@ public class WikipediaItem extends AppCompatActivity {
     }
 
 
+    /* Request an Wikipedia API
+    * Bei Android muss eine Anfrage über einen Asynctask erfolgen
+    * So wird auch in preExecute eine ProgressBar geladen
+    * In doInBackground kommt die eigentliche Abfrage
+    * In PostExecute wird der entpackte JSON Content in einem Textview dargestellt und
+    * die Progressbar wieder geschlossen
+    */
     private class JsonTask extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {

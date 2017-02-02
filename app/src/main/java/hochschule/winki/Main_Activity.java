@@ -69,9 +69,6 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     private SimpleGeofence redCubeBuildingGeofence;
     private SimpleGeofence libraryHMGeofence;
 
-    // Persistent storage for geofences.
-    private SimpleGeofenceStore mGeofenceStorage;
-
     private LocationServices mLocationService;
     // PendingIntent, das benutzt wird um die Geofences zu überwachen
     private PendingIntent mGeofenceRequestIntent;
@@ -119,10 +116,6 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
         mApiClient.connect();
-
-        // Instantiate a new geofence storage area.
-        mGeofenceStorage = new SimpleGeofenceStore(this);
-        // Instantiate the current List of geofences.
         mGeofenceList = new ArrayList<Geofence>();
         createGeofences();
     }
@@ -149,9 +142,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
                 Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT
         );
 
-        // Store these flat versions in SharedPreferences and add them to the geofence list.
-        mGeofenceStorage.setGeofence(REDCUBE_BUILDING_ID, redCubeBuildingGeofence);
-        mGeofenceStorage.setGeofence(LIBRARY_HM_ID, libraryHMGeofence);
+        // Die Geofences werden der Liste hinzugefügt
         mGeofenceList.add(redCubeBuildingGeofence.toGeofence());
         mGeofenceList.add(libraryHMGeofence.toGeofence());
     }

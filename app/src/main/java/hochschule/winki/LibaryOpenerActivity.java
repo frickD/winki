@@ -11,6 +11,9 @@ import android.view.View;
 
 public class LibaryOpenerActivity extends AppCompatActivity {
 
+    /*
+     * Falls die Notification angeklickt wird, so wird diese Klasse geöffnet, die gleich zum Browser weiterleitet
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

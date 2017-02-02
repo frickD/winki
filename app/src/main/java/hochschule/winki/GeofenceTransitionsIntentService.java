@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,9 +47,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
     }
 
     /**
-     * Handles incoming intents.
-     * @param intent The Intent sent by Location Services. This Intent is provided to Location
-     * Services (inside a PendingIntent) when addGeofences() is called.
+     * @param intent Verarbeitung des Intents, dass vom Location Service geschickt wird.
+     * Wenn der User den Geofenceraum betritt, so wird eine Notification los geschickt
      */
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -65,7 +65,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
                 Toast.makeText(this, getString(R.string.entering_geofence),
                         Toast.LENGTH_SHORT).show();
             } else if (Geofence.GEOFENCE_TRANSITION_EXIT == transitionType) {
-                // Delete the data item when leaving a geofence region.
                 Log.e("GEOFENCE", "Leaving the Zone");
                 showToast(this, R.string.exiting_geofence);
             }
@@ -73,7 +72,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
     }
 
     /**
-     * Showing a toast message, using the Main thread
+     * Methode für einen Toast
      */
     private void showToast(final Context context, final int resourceId) {
         Handler mainThread = new Handler(Looper.getMainLooper());
@@ -85,6 +84,9 @@ public class GeofenceTransitionsIntentService extends IntentService {
         });
     }
 
+    /**
+     * Notification Darstellung
+     */
     private void showNotification(Context context) {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, LibaryOpenerActivity.class), 0);
 

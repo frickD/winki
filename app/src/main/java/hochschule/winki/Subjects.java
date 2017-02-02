@@ -9,6 +9,13 @@ import java.util.HashMap;
 
 public class Subjects {
 
+    /*
+     * Diese Hashmap ist entscheidend dafür, dass alle Begriffe richtig geladen werden
+     * Zuerst wird eine Liste erzeugt, die mit den Arraylisten der Fächer befüllt wird
+     * Nun wird zu jedem Fach ein Key gesetzt und das Value mit den zugehörigen Begriffen
+     * So ist es möglich zu sagen, welches Fach man angeklickt hat als Key zu übergeben
+     * und man erhält einen String Array mit den Begriffen zurück
+     */
     public static HashMap<String, String[]> getObjectMap() {
         HashMap<String, String[]> map = new HashMap<>();
         ArrayList<String[]> subjectlist = subjectList();
@@ -33,7 +40,7 @@ public class Subjects {
     }
 
    /*
-        //Alternative zum Befüllen der Map
+        //Eine mögliche Alternative zum Befüllen der Map
         private ArrayList<String> allSubjectsList() {
         ArrayList<String> allSubjects = new ArrayList<>();
         for (String[] element: subjectList()) {
@@ -45,15 +52,16 @@ public class Subjects {
         return allSubjects;
     }*/
 
+    //Die einzelnen Fächer der Semester
     public static String[] firstSemester = {"Wirtschaftsmathematik 1", "BWL - Grundlagen", "Wirtschaftsinformatik 1", "Softwareentwicklung 1", "Buchführung"};
     public static final String[] secondSemester = {"Wirtschaftsprivatrecht 1", "Volkswirtschaft", "Statistik und Operations Research", "Wirtschaftsmathematik 2", "Softwarentwicklung 2", "Wirtschaftsinformatik 2"};
     public static final String[] thirdSemester = {"Personal und Organisation", "Datenbanksysteme", "Datenkommunikation", "Softwareengineering 1", "Informationssysteme 1"};
     public static final String[] fourthSemester = {"Bilanzierung und Steuern", "Informationssysteme 2", "Softwareengineering 2"};
-    //private static final String[] fifthSemester = {"PBLV Seminar", "PBLV Projekt", "Praxisbericht"};
     public static final String[] sixthSemester = {"Kosten- und Leistungsrechnung", "Business Simulation", "Geschäftsprozesse"};
-    //private static final String[] seventhSemester = {"Bachelorarbeit"};
     public static final String[] wpfgWirtschaft = {"Produktionswirtschaft", "Datenschutz",  "Marketing"};
     public static final String[] wpfgIT = {"IT-Sicherheit", "Datenmanagement", "Algorithmen und Datenstrukturen"};
+
+   //Liste mit allen Semestern
     public static ArrayList<String[]> subjectList() {
         ArrayList<String[]> list = new ArrayList<>();
         list.add(firstSemester);

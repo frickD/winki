@@ -30,6 +30,9 @@ public class List extends ArrayAdapter<String> implements AdapterView.OnItemClic
     }
 
 
+    /*
+     * Laden des Listenlayouts
+     */
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();

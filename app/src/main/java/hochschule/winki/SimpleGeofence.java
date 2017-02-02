@@ -7,7 +7,7 @@ package hochschule.winki;
 import com.google.android.gms.location.Geofence;
 
 /**
- * A single Geofence object, defined by its center and radius.
+ * Ein einzelenes Geofence Object, definiert durch die Location und Radius
  */
 public class SimpleGeofence {
 
@@ -20,16 +20,16 @@ public class SimpleGeofence {
     private int mTransitionType;
 
     /**
-     * @param geofenceId The Geofence's request ID.
-     * @param latitude Latitude of the Geofence's center in degrees.
-     * @param longitude Longitude of the Geofence's center in degrees.
-     * @param radius Radius of the geofence circle in meters.
-     * @param expiration Geofence expiration duration.
-     * @param transition Type of Geofence transition.
+     * @param geofenceId Die Geofence ID
+     * @param latitude Breitengrad des Geofences Objekts
+     * @param longitude Längengrad des Geofences Objekts
+     * @param radius Radius vom Geofence Object
+     * @param expiration Dauer des Geofences
+     * @param transition Type des Geofences
      */
     public SimpleGeofence(String geofenceId, double latitude, double longitude, float radius,
                           long expiration, int transition) {
-        // Set the instance fields from the constructor.
+        // Setzen der Werte
         this.mId = geofenceId;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
@@ -38,7 +38,7 @@ public class SimpleGeofence {
         this.mTransitionType = transition;
     }
 
-    // Instance field getters.
+    // Getter der Werte
     public String getId() {
         return mId;
     }
@@ -59,11 +59,11 @@ public class SimpleGeofence {
     }
 
     /**
-     * Creates a Location Services Geofence object from a SimpleGeofence.
-     * @return A Geofence object.
+     * Erzeugung eines Geofence Objekts durch Location Services
+     * @return Geofence Objekt
      */
     public Geofence toGeofence() {
-        // Build a new Geofence object.
+        // Erstellen eines neuen Geofences Objekts
         return new Geofence.Builder()
                 .setRequestId(mId)
                 .setTransitionTypes(mTransitionType)
