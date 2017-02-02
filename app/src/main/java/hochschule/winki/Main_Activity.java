@@ -47,19 +47,25 @@ import static hochschule.winki.Constants.LIBRARY_HM_RADIUS_METERS;
 
 public class Main_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private ListView lv;
+
+    //Die Hashmap, die dafür verantwortlich ist, dass das die richtigen Begriffe dargestellt werden
     private HashMap<String, String[]> objectMap;
+
     public static String ArticleTitleBundleKey = "Title";
+
+    //Suchzeile
     private LinearLayout searchLayout;
+
+    //Zwischenspeicherung der ausgewählten Sachen
     private boolean isBackOnSemester = true;
     private String[] backArray;
     private String backString;
     private String backSemester;
 
-    // Internal List of Geofence objects. In a real app, these might be provided by an API based on
-    // locations within the user's proximity.
+    // Liste von Geofence Objekten
     ArrayList<Geofence> mGeofenceList;
 
-    // These will store hard-coded geofences in this sample app.
+    // Geofence Objekte in der App
     private SimpleGeofence redCubeBuildingGeofence;
     private SimpleGeofence libraryHMGeofence;
 
@@ -67,17 +73,24 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     private SimpleGeofenceStore mGeofenceStorage;
 
     private LocationServices mLocationService;
-    // Stores the PendingIntent used to request geofence monitoring.
+    // PendingIntent, das benutzt wird um die Geofences zu überwachen
     private PendingIntent mGeofenceRequestIntent;
     private GoogleApiClient mApiClient;
 
-    // Defines the allowable request types (in this example, we only add geofences).
+    // Definiert die möglichen Anfragetypen, jedoch fügen wir die Geofences nur hinzu.
     private enum REQUEST_TYPE {
         ADD
     }
 
     private REQUEST_TYPE mRequestType;
 
+    /**  Erstellung der MaiActivity:
+     *   -Öffnen des Layouts
+     *   -Herholen der Hashmap
+     *   -Überprüfung, ob man eine Verbindung zu den Google Play Services hat
+     *   -Überprüfung, ob man eine Internetverbindung hat (wenn nicht dann wird das 'offline' Layout geladen
+     *   -Herstellung der Verbindung zu Google API
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,13 +128,12 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     * In this sample, the geofences are predetermined and are hard-coded here. A real app might
-     * dynamically create geofences based on the user's location.
+     * Erzeugen der Geofences (Roter Würfel und die Bib)
      */
     public void createGeofences() {
-        // Create internal "flattened" objects containing the geofence data.
+        // Erzeugen der Geofence Objekte mit den gegebenen Werten
         redCubeBuildingGeofence = new SimpleGeofence(
-                REDCUBE_BUILDING_ID,                // geofenceId.
+                REDCUBE_BUILDING_ID,
                 REDCUBE_BUILDING_LATITUDE,
                 REDCUBE_BUILDING_LONGITUDE,
                 REDCUBE_BUILDING_RADIUS_METERS,
@@ -129,7 +141,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
                 Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT
         );
         libraryHMGeofence = new SimpleGeofence(
-                LIBRARY_HM_ID,                // geofenceId.
+                LIBRARY_HM_ID,
                 LIBRARY_HM_LATITUDE,
                 LIBRARY_HM_LONGITUDE,
                 LIBRARY_HM_RADIUS_METERS,
@@ -145,9 +157,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
+    /**
+     * Falls die Verbindung fehl schlägt, so wird nach der möglichen Ursache geschaut
+     */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        // If the error has a resolution, start a Google Play services activity to resolve it.
         if (connectionResult.hasResolution()) {
             try {
                 connectionResult.startResolutionForResult(this,
@@ -162,12 +176,12 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     * Once the connection is available, send a request to add the Geofences.
+     * Wenn es eine Verbindung gibt, so wird ein Request rausgeschickt, um die Geofences hinzuzufügen
      */
     @Override
     public void onConnected(Bundle connectionHint) {
-        // Get the PendingIntent for the geofence monitoring request.
-        // Send a request to add the current geofences.
+        // Das PendingIntent für die Geofencing Überwachungsabfrage wird geholt
+        // Request wird versendet und die aktuellen Geofences (in der Liste) werden übergeben
         mGeofenceRequestIntent = getGeofenceTransitionPendingIntent();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, getString(R.string.no_gps_permission), Toast.LENGTH_SHORT).show();
@@ -178,6 +192,9 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         Toast.makeText(this, getString(R.string.start_geofence_service), Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Wird die Verbindung aufgehoben, so werden die Geofences entfernt
+     */
     @Override
     public void onConnectionSuspended(int i) {
         if (null != mGeofenceRequestIntent) {
@@ -187,8 +204,8 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
 
 
     /**
-     * Checks if Google Play services is available.
-     * @return true if it is.
+     * Überprüft, ob die Google Play Services erreichbar sind
+     * @return true, wenn sie es sind
      */
     private boolean isGooglePlayServicesAvailable() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -204,8 +221,8 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     * Checks if Mobile has internet Connection.
-     * @return true if it is.
+     *  Überprüft, ob das Gerät eine aktive Internetverbindung hat
+     * @return true, wenn es das ist
      */
     public boolean isOnline() {
         ConnectivityManager cm =
@@ -215,19 +232,28 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
     /**
-     * Create a PendingIntent that triggers GeofenceTransitionIntentService when a geofence
-     * transition occurs.
+     * Erstellt ein PendingIntent, das überwacht wenn sich was im Geofencing passiert (z.B. User betritt die Zone)
+     * @return Das PendingIntent
      */
     private PendingIntent getGeofenceTransitionPendingIntent() {
         Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    /**
+     * Neuladen der Activity Klasse
+     */
     public void onReload(View view) {
         Intent myIntent = new Intent(Main_Activity.this, Main_Activity.class);
         startActivity(myIntent);
     }
 
+    /**
+     * onClick Methoden, falls der User z.B. das erste Semester öffnet
+     * so wird auch zwischengespeichert auf was er geklickt hat (im Fall, dass er zurückklickt)
+     * Die Liste mit dem Array firstSemester wird geöffnet
+     * und die Überschrift wird auf das gesetzt, was er angeklickt hat
+     */
     public void onFirstSemester(View view) {
         backString = "1. Semester";
         backSemester = backString;
@@ -256,6 +282,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         setHeadline(backString);
     }
 
+    /**
+     * Im fünften und im siebten Semester wird gleich die WikipediaItem Activty aufgerufen,
+     * da es hier keine Kurse gibt
+     * Der Wikipedia Artivel wird geladen.
+     */
     public void onFifthSemester (View view) {
         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
         Bundle b = new Bundle();
@@ -293,11 +324,23 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         setHeadline(backString);
     }
 
+    /**
+     * onClick Methode, um die Suchleiste wieder zu 'schließen'
+     */
     public void onCloseSearch(View view) {
         searchLayout.setVisibility(View.GONE);
     }
 
 
+    /**
+     * Öffnen der Liste der Fächer:
+     * Das Array, das vorher mitgeben wurde, wird zwischen gespeichert.
+     * Der onItemClickListener wird aktiviert.
+     * Beim Auswählen eines Faches wird im übergebenen Array geschaut, was genau angeklickt wurde
+     * dies wird nun in der Hashmap durchsucht und die Hashmap liefert ein Array mit den Begriffen des Faches.
+     * Dieses Array der Hashmap wird nun für die neue Liste weitergeben, um die Begriffe darzustellen
+     * Auch hier wird das angeklickte Fach zwischen gespeichert, und die Headline wird gesetzt
+     */
     private void openList(final String[] givenSubject) {
         this.backArray = givenSubject;
         List adapter = setListView(givenSubject);
@@ -314,6 +357,12 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         lv.setAdapter(adapter);
     }
 
+    /**
+     * Öffnen der Liste der Begriffe:
+     * Der onItemClickListener wird aktiviert.
+     * Beim Anklicken eines Begriffes wird die Wikipedia Item Activity geladen,
+     * dabei wird nun der ausgewählt Begriff an die Klasse mit übergeben.
+     */
     private void openSubject(final String[] givenSubject) {
         List adapter = setListView(givenSubject);
         lv.setOnItemClickListener((new AdapterView.OnItemClickListener() {
@@ -329,6 +378,12 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         lv.setAdapter(adapter);
     }
 
+    /**
+     * Das eigentliche öffnen der Liste bzw. Laden des Listen Layouts
+     * Als input wird hier ein String Array verwendet.
+     * Dieses String Array ist sozusagen der Content der Liste
+     * @return der Listadapter wird zurückgegeben
+     */
     private List setListView(final String[] givenSubject) {
         setContentView(R.layout.list);
         List adapter = new List(Main_Activity.this, givenSubject);
@@ -336,6 +391,12 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         return adapter;
     }
 
+    /**
+     * Falls der User zurück klickt,
+     * so wird geschaut, wo er sich befindet, ob er nun die Fächer oder die Startseite sehen will
+     * Wenn er zur Startseite will, so wird das MainActivity Layout geladen
+     * Wenn er die Fächer sehen will, so wird die Liste erneut geladen mit dem zwischen gespeicherten Array
+     */
     @Override
     public void onBackPressed() {
         if(this.isBackOnSemester) {
@@ -349,6 +410,10 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    /**
+     * Der SearchButton Listener
+     * Falls der User suchen will, so wird die Suchzeile dargestellt und der User benachrichtigt
+     */
     private void setSearchButtonListener() {
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -362,6 +427,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
+    /**
+     * onClick Methode
+     * Wenn der User die Suche starten will,
+     * so wird der Browser geöffnet mit dem Wikipedia Link zu dem eingegeben Input
+     */
     public void onSearch(View view) {
         EditText searchEditText = (EditText) findViewById(R.id.searchInput);
         String searchInput = searchEditText.getText().toString();
@@ -369,6 +439,9 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         startActivity(browserIntent);
     }
 
+    /**
+     * Setzen der Überschrift
+     */
     private void setHeadline (String clickedItem) {
         TextView headline = (TextView) findViewById(R.id.header);
         headline.setText(clickedItem);
