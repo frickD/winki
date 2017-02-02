@@ -30,6 +30,7 @@ After confirmation of the input, the browser will be opened and show you the sea
 More
 -------------------
 The requirements are holded at: https://trello.com/b/orgRuoqV/winki
+
 You can download the last APK-File from  <i class="icon-provider-gdrive"></i> **Google Drive:** https://drive.google.com/open?id=0B95aqtjL8h0XQjFNVXotelROcDQ
 
 
