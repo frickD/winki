@@ -91,7 +91,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.close)
+                        .setSmallIcon(R.drawable.hmlogo)
                         .setContentTitle("Willkommen in der HM")
                         .setContentText("Bitte öffnen Sie die App, um die Bib der HM zu durchsuchen");
         mBuilder.setContentIntent(contentIntent);
