@@ -60,7 +60,6 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
             int transitionType = geoFenceEvent.getGeofenceTransition();
             if (Geofence.GEOFENCE_TRANSITION_ENTER == transitionType) {
-                Toast.makeText(this, "HI BIST DA", Toast.LENGTH_SHORT).show();
                 Log.e("GEOFENCE", "Enter the Zone");
                 showNotification(this);
                 Toast.makeText(this, getString(R.string.entering_geofence),
@@ -92,8 +91,8 @@ public class GeofenceTransitionsIntentService extends IntentService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.hmlogo)
-                        .setContentTitle("Willkommen in der HM")
-                        .setContentText("Bitte öffnen Sie die App, um die Bib der HM zu durchsuchen");
+                        .setContentTitle(getString(R.string.welcome_at_HM))
+                        .setContentText(getString(R.string.notifation_text));
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);

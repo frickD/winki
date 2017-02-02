@@ -34,4 +34,13 @@
     <string name="exiting_geofence">Sie verlassen die Hochschule München</string>
     <string name="no_gps_permission">Bitte aktivieren Sie die GPS-Erlaubnis für Winki</string>
     <string name="title_activity_libary_opener">LibaryOpenerActivity</string>
+    <string name="welcome_at_HM">Willkommen in der HM</string>
+    <string name="notifation_text">Bitte öffnen Sie die App, um die Bibliothek der HM zu durchsuchen</string>
+    <string name="no_googleplay_service">Google Play Services sind nicht erreichbar</string>
+    <string name="googleplay_service_available">Google Play Services erreichbar</string>
+    <string name="start_searching">Geben Sie Ihren Suchbegriff ein</string>
+    <string name="praxissemester">Praxissemster</string>
+    <string name="bachelor">Bachelorarbeit</string>
+    <string name="economics">Wirtschaft Wahlfächer</string>
+    <string name="it">IT Wahlfächer</string>
 </resources>

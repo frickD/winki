@@ -90,8 +90,8 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         objectMap = Subjects.getObjectMap();
 
         if (!isGooglePlayServicesAvailable()) {
-            Log.e(TAG, "Google Play services unavailable.");
-            Toast.makeText(this, "Google Play services unavailable", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, getString(R.string.no_googleplay_service));
+            Toast.makeText(this, getString(R.string.no_googleplay_service), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -194,11 +194,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (ConnectionResult.SUCCESS == resultCode) {
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "Google Play services is available.");
+                Log.d(TAG, getString(R.string.googleplay_service_available));
             }
             return true;
         } else {
-            Log.e(TAG, "Google Play services is unavailable.");
+            Log.e(TAG, getString(R.string.no_googleplay_service));
             return false;
         }
     }
@@ -259,7 +259,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     public void onFifthSemester (View view) {
         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
         Bundle b = new Bundle();
-        b.putString(ArticleTitleBundleKey, "Praxissemester");
+        b.putString(ArticleTitleBundleKey, getString(R.string.praxissemester));
         myIntent.putExtras(b);
         startActivity(myIntent);
     }
@@ -274,20 +274,20 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
     public void onSeventhSemester (View view) {
         Intent myIntent = new Intent(Main_Activity.this, WikipediaItem.class);
         Bundle b = new Bundle();
-        b.putString(ArticleTitleBundleKey, "Bachelorarbeit");
+        b.putString(ArticleTitleBundleKey, getString(R.string.bachelor));
         myIntent.putExtras(b);
         startActivity(myIntent);
     }
 
     public void onWirtschaftSemester (View view) {
-        backString = "Wirtschaft Wahlfächer";
+        backString = getString(R.string.economics);
         backSemester = backString;
         openList(Subjects.wpfgWirtschaft);
         setHeadline(backString);
     }
 
     public void onITSemester (View view) {
-        backString = "IT Wahlfächer";
+        backString = getString(R.string.it);
         backSemester = backString;
         openList(Subjects.wpfgIT);
         setHeadline(backString);
@@ -355,7 +355,7 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Geben Sie Ihren Suchbegriff ein", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, getString(R.string.start_searching), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 searchLayout.setVisibility(View.VISIBLE);
             }
