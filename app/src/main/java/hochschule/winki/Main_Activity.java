@@ -279,9 +279,6 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         startActivity(myIntent);
     }
 
-    public void onCloseSearch(View view) {
-        searchLayout.setVisibility(View.GONE);
-    }
     public void onWirtschaftSemester (View view) {
         backString = "Wirtschaft Wahlfächer";
         backSemester = backString;
@@ -295,6 +292,11 @@ public class Main_Activity extends AppCompatActivity implements GoogleApiClient.
         openList(Subjects.wpfgIT);
         setHeadline(backString);
     }
+
+    public void onCloseSearch(View view) {
+        searchLayout.setVisibility(View.GONE);
+    }
+
 
     private void openList(final String[] givenSubject) {
         this.backArray = givenSubject;

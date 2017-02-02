@@ -25,6 +25,7 @@ public class Constants {
     // An app with dynamically-created geofences would want to include a reasonable expiration time.
     public static final long GEOFENCE_EXPIRATION_TIME = Geofence.NEVER_EXPIRE;
 
+
     // Geofence parameters for the Android building on Google's main campus in Mountain View.
     public static final String REDCUBE_BUILDING_ID = "1";
     public static final double REDCUBE_BUILDING_LATITUDE = 48.154709;
